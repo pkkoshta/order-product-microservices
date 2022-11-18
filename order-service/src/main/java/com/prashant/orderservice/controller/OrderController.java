@@ -4,6 +4,9 @@ import com.prashant.orderservice.model.Order;
 import com.prashant.orderservice.service.OrderService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,19 +20,24 @@ import java.util.Optional;
 @NoArgsConstructor
 public class OrderController {
 
+    Logger logger = LoggerFactory.getLogger(OrderController.class);
+
     @Value("${spring.prashant}")
     private String name;
-
+@Autowired
     private OrderService orderService;
 
     @GetMapping("/hello")
     public String getHello(){
+        logger.info("Inside hello call");
         System.out.println("name = " + name);
+        logger.info("After hello call");
         return "Hi welcome to order service..";
     }
 
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(@RequestBody Order order){
+
         return new ResponseEntity<>(orderService.createOrder(order), HttpStatus.CREATED);
     }
 
