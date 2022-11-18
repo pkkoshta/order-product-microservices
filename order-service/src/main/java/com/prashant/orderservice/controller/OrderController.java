@@ -20,7 +20,7 @@ import java.util.Optional;
 @NoArgsConstructor
 public class OrderController {
 
-    public static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+     static Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Value("${spring.prashant}")
     private String name;
